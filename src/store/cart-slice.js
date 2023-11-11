@@ -39,7 +39,7 @@ const cartSlice = createSlice({
       }
     },
     setShowCart(state) {
-      state.showCart = true;
+      state.showCart = !state.showCart;
     },
   },
 });
