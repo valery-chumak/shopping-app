@@ -25,14 +25,7 @@ function App() {
           type: "warning",
         })
       );
-      const res = await fetch(
-        "https://shopping-project-72a95-default-rtdb.europe-west1.firebasedatabase.app/cartItems.json",
-        {
-          method: "PUT",
-          body: JSON.stringify(cart),
-        }
-      );
-      const data = await res.json();
+
       dispatch(
         uiActions.showNotification({
           open: true,
@@ -48,7 +41,7 @@ function App() {
         type: "error",
       });
     });
-  }, [cart]);
+  }, [cart, dispatch]);
   return (
     <div className="App">
       {notification && (
