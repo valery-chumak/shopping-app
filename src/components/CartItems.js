@@ -10,13 +10,14 @@ const CartItems = () => {
       <ul>
         {cartItems.map((item) => (
           <li key={item.id}>
+            {" "}
             <CartItem
+              quantity={item.quantity}
               id={item.id}
               price={item.price}
               total={item.totalPrice}
               name={item.name}
-              quantity={item.quantity}
-            />
+            />{" "}
           </li>
         ))}
       </ul>

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Auth from "./components/Auth";
 import Layout from "./components/Layout";
-import { useDispatch, useSelector } from "react-redux";
 import Notification from "./components/Notification";
-import { uiActions } from "./store/ui-slice";
+import { fetchData, sendCartData } from "./store/cart-actions";
+
 let isFirstRender = true;
 function App() {
   const dispatch = useDispatch();
@@ -13,34 +14,17 @@ function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+  useEffect(() => {
     if (isFirstRender) {
       isFirstRender = false;
       return;
     }
-    const fetchItems = async () => {
-      dispatch(
-        uiActions.showNotification({
-          open: true,
-          message: "Sending request",
-          type: "warning",
-        })
-      );
 
-      dispatch(
-        uiActions.showNotification({
-          open: true,
-          message: "Sent request successfully",
-          type: "success",
-        })
-      );
-    };
-    fetchItems().catch((err) => {
-      uiActions.showNotification({
-        open: true,
-        message: "Sending request failed",
-        type: "error",
-      });
-    });
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
   }, [cart, dispatch]);
   return (
     <div className="App">

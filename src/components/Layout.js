@@ -6,8 +6,8 @@ import CartItems from "./CartItems";
 import { useSelector } from "react-redux";
 const Layout = () => {
   let total = 0;
-
   const itemsList = useSelector((state) => state.cart.itemsList);
+
   itemsList.forEach((item) => {
     total += item.totalPrice;
   });
